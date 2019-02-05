@@ -1,4 +1,4 @@
-import { Get, Controller } from '@nestjs/common';
+import { Get, Controller, Body, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 
 @Controller()
@@ -9,4 +9,10 @@ export class AppController {
   root() {
     return this.appService.root();
   }
+
+  @Post('activate')
+  activate(@Body() props) {
+    return this.appService.activate(props.license, props.pc);
+  }
+
 }

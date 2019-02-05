@@ -8,7 +8,7 @@ import { License } from './license.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'default',
+      database: 'db',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
