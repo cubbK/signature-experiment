@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { License } from './license.entity';
 import { Repository } from 'typeorm';
@@ -31,12 +31,19 @@ export class AppService {
   async activate(license: string, pc: string) {
     const foundLicense = await this.licenseRepository.findOne({ license });
 
-    if (foundLicense === null) {
-      throw new Error('no license');
+    if (foundLicense === null || foundLicense === undefined) {
+      throw new HttpException('Invalid license', HttpStatus.NOT_ACCEPTABLE);
     }
 
-    if (foundLicense.pcUsed !== null) {
-      throw new Error('already activated');
+    if (
+      foundLicense.pcUsed !== pc &&
+      foundLicense.pcUsed !== undefined &&
+      foundLicense.pcUsed !== null
+    ) {
+      throw new HttpException(
+        'License has been already activated',
+        HttpStatus.NOT_ACCEPTABLE,
+      );
     }
 
     foundLicense.pcUsed = pc;
