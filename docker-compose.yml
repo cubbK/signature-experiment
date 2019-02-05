@@ -1,8 +1,9 @@
 version: "3"
 services:
-  validationServer:
-    build: ./server
+  validation-server:
+    build: ./validation-server
     restart: always
-    ports: "4000:4000"
+    ports: 
+      - "4000:4000"
     volumes:
       - ./validation-server:/app
