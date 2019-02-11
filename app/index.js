@@ -3,14 +3,12 @@ const pc = process.env.PC;
 
 const axios = require("axios");
 
-console.log("PC: " + pc)
-
 async function main() {
   try {
     const response = await axios.post(
       "http://validation-server:4000/activate",
       {
-        license: "key1",
+        license: argv.key,
         pc: pc
       }
     );

@@ -2,25 +2,25 @@ version: "3"
 services:
   validation-server:
     build: ./validation-server
-    restart: always
     ports: 
       - "4000:4000"
     volumes:
       - ./validation-server:/app
+      - /app/node_modules
   app_1:
     build: ./app
-    restart: always
     volumes:
       - ./app:/app
+      - /app/node_modules
     environment:
     - PC=111
     tty: true
   
   app_2: 
     build: ./app
-    restart: always
     volumes:
       - ./app:/app
+      - /app/node_modules
     environment:
     - PC=222
     tty: true
