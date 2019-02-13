@@ -13,7 +13,7 @@ services:
       - ./app:/app
       - /app/node_modules
     environment:
-    - PC=111
+    - ID=111
     tty: true
   
   app_2: 
@@ -22,5 +22,5 @@ services:
       - ./app:/app
       - /app/node_modules
     environment:
-    - PC=222
+    - ID=222
     tty: true
